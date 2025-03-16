@@ -108,6 +108,9 @@ wget https://mirrors.infvie.org/account-docking/acctlink/acctlink_amd64 && chmod
 # 调试业务项目，前台运行
 ./acctlink_amd64 app compose run app
 
+# 查询基础报告信息状态
+./acctlink_amd64 report
+
 # 初始化业务项目数据库密码
 ./acctlink_amd64 app init
 
@@ -131,6 +134,8 @@ acctlink app compose exec mysql bash
 ![Image text](https://mirrors.infvie.org/account-docking/acctlink/img/acctlink.png)
 #### acctlink-install
 ![Image text](https://mirrors.infvie.org/account-docking/acctlink/img/acctlink-install.png)
+#### acctlink-validating
+![Image text](https://mirrors.infvie.org/account-docking/acctlink/img/acctlink-validating.png)
 #### acctlink-report
 ![Image text](https://mirrors.infvie.org/account-docking/acctlink/img/acctlink-report.png)
 #### acctlink-uninstall
