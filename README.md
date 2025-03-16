@@ -4,9 +4,10 @@ AcctLink 是一个用 Go 语言编写的高效 Docker 和 Registry 管理工具�
 
 ## 核心特性
 
-- **自动化部署**
+- **自动化部署(离线与在线)**
   - Docker 环境自动安装和配置
-  - Registry 服务自动部署和管理
+  - Docker compose 环境自动安装和配置
+  - Docker registry 服务自动部署和管理
   - 系统依赖自动检测和安装
 
 - **配置管理**
@@ -16,6 +17,7 @@ AcctLink 是一个用 Go 语言编写的高效 Docker 和 Registry 管理工具�
   - 支持运行时配置更新
 
 - **镜像管理**
+  - 自动化编译打包
   - 私有镜像仓库管理
   - 镜像加载和分发
   - 镜像版本控制
@@ -92,7 +94,7 @@ system:
 
 ```shell
 # 安装基础组件
-wget https://mirrors.infvie.org/account-docking/acctlink/acctlink_amd64 && chmod +x acctlink_amd64 && ./acctlink_amd64 deps && ./acctlink_amd64 install
+wget https://mirrors.infvie.org/account-docking/acctlink/acctlink_amd64 && chmod +x acctlink_amd64 && ./acctlink_amd64 deps install && ./acctlink_amd64 install
 
 # 拉起基础组件(mysql/nginx)
 ./acctlink_amd64 app create && ./acctlink_amd64 app up mysql && ./acctlink_amd64 app up nginx && ./acctlink_amd64 app ps
@@ -126,4 +128,10 @@ acctlink app compose logs mysql
 acctlink app compose exec mysql bash
 ```
 
-![Image text](https://mirrors.infvie.org/account-docking/acctlink/acctlink.png)
+![Image text](https://mirrors.infvie.org/account-docking/acctlink/img/acctlink.png)
+#### acctlink-install
+![Image text](https://mirrors.infvie.org/account-docking/acctlink/img/acctlink-install.png)
+#### acctlink-report
+![Image text](https://mirrors.infvie.org/account-docking/acctlink/img/acctlink-report.png)
+#### acctlink-uninstall
+![Image text](https://mirrors.infvie.org/account-docking/acctlink/img/acctlink-uninstall.png)
