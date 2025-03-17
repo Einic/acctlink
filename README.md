@@ -74,7 +74,7 @@ registry:
 download:
   base_url: "https://mirrors.infvie.org/account-docking/" #在线（镜像、组件二进制）下载地址
   images:                                                 #指定的镜像名称
-    - images/alpine#3.19.1                                
+    - images/alpine#3.19.1
     - images/mysql#8.0.37
     - images/nginx#1.26-alpine-unpri
     - images/node#20-alpine
@@ -93,42 +93,49 @@ system:
 ### 使用方法
 
 ```shell
+# 初始化ARCH
+ARCH=$(case $(uname -m) in
+    x86_64)  echo "amd64" ;;
+    aarch64) echo "arm64" ;;
+    *) echo "unsupported" ;;
+esac)
+
 # 安装基础组件
-wget https://mirrors.infvie.org/account-docking/acctlink/acctlink_amd64 && chmod +x acctlink_amd64 && ./acctlink_amd64 deps install && ./acctlink_amd64 install
+mkdir -p /data/acctlink/ && wget -O /data/acctlink/acctlink_$ARCH https://mirrors.infvie.org/account-docking/acctlink/acctlink_$ARCH && cd /data/acctlink/ && chmod +x acctlink_$ARCH && ./acctlink_$ARCH deps install && ./acctlink_$ARCH install
 
 # 拉起基础组件(mysql/nginx)
-./acctlink_amd64 app create && ./acctlink_amd64 app up mysql && ./acctlink_amd64 app up nginx && ./acctlink_amd64 app ps
+./acctlink_$ARCH app create && ./acctlink_$ARCH app up mysql && ./acctlink_$ARCH app up nginx && ./acctlink_$ARCH app ps && ./acctlink_$ARCH report
 
 # 编译与拉起业务项目
-./acctlink_amd64 app build && ./acctlink_amd64 app up app && ./acctlink_amd64 app ps
+./acctlink_$ARCH app build && ./acctlink_$ARCH app up app && ./acctlink_$ARCH app ps
 
 ```
 
 ```shell
 # 调试业务项目，前台运行
-./acctlink_amd64 app compose run app
+./acctlink_$ARCH app compose run app
 
 # 查询基础报告信息状态
-./acctlink_amd64 report
+./acctlink_$ARCH report
 
 # 初始化业务项目数据库密码
-./acctlink_amd64 app init
+./acctlink_$ARCH app init
 
 # 启动特定服务
-acctlink app up mysql
+./acctlink_$ARCH app up mysql
 
-# 构建特定服务
-acctlink app build nginx
+# 构建特定服务(e.g:app)
+./acctlink_$ARCH app build app
 
 # 查看特定服务状态
-acctlink app ps mysql
+./acctlink_$ARCH app ps mysql
 
 # 停止特定服务
-acctlink app down mysql
+./acctlink_$ARCH app down mysql
 
 # 执行任意 docker-compose 命令
-acctlink app compose logs mysql
-acctlink app compose exec mysql bash
+./acctlink_$ARCH app compose logs mysql
+./acctlink_$ARCH app compose exec mysql bash
 ```
 
 ![Image text](https://mirrors.infvie.org/account-docking/acctlink/img/acctlink.png)
