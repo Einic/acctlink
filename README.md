@@ -60,7 +60,7 @@ acctlink/
 docker:
   version: "28.0.0"                                    # Docker 版本
   registry_mirror: "https://d8b3zdiw.mirror.aliyuncs.com"  # 镜像加速器
-  insecure_registry: "127.0.0.1:5000"                 # 不安全仓库地址
+  insecure_registry: "127.0.0.1:5000"                 # 内部仓库地址
   data_root: "/data/docker"                           # Docker 数据目录
   bin_root: "/usr/local/bin"                          # Docker 二进制文件目录
   systemd_service: "docker"                           # Docker 服务名称
@@ -72,12 +72,12 @@ registry:
   config_path: "/etc/docker/registry"                 # Registry 配置目录
   systemd_service: "registry"                         # Registry 服务名称
 download:
-  base_url: "https://mirrors.infvie.org/account-docking/" #在线（镜像、组件二进制）下载地址
+  base_url: "https://mirrors.infvie.org/account-docking/" #在线（组件二进制）下载地址
   images:                                                 #指定的镜像名称
-    - images/alpine#3.19.1
-    - images/mysql#8.0.37
-    - images/nginx#1.26-alpine-unpri
-    - images/node#20-alpine
+   - node-base#20-alpine
+   - nginx#1.26-alpine
+   - mysql#8.0.37
+   - node#20-alpine
   images_path: "images"                                   # 本地目录
 system:
   required_deps:                                      # 必需的系统依赖
@@ -123,6 +123,9 @@ mkdir -p /data/acctlink/ && wget -O /data/acctlink/acctlink_$ARCH https://mirror
 
 # 启动特定服务
 ./acctlink_$ARCH app up mysql
+
+# 自动导入app下*.sql文件
+./acctlink_$ARCH app reload
 
 # 构建特定服务(e.g:app)
 ./acctlink_$ARCH app build app
