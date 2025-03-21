@@ -37,7 +37,7 @@ AcctLink 是一个用 Go 语言编写的高效 Docker 和 Registry 管理工具�
 ```shell
 /data/acctlink
 .
-├── acctlink_amd64                    # 自动化可执行工具（acctlink_arm64）
+├── acctlink_amd64              # 自动化可执行工具（acctlink_arm64）
 ├── app
 │   ├── Dockerfile              # 项目编译与容器打包文件
 │   ├── .dockerignore           # 项目配置.dockerignore
