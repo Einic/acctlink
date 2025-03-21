@@ -35,21 +35,47 @@ AcctLink 是一个用 Go 语言编写的高效 Docker 和 Registry 管理工具�
 ## 快速开始
 
 ```shell
-acctlink/
-├── account-docking.yaml
-├── acctlink_amd64
+/data/acctlink
+.
+├── acctlink_amd64                    # 自动化可执行工具（acctlink_arm64）
 ├── app
-│   ├── Dockerfile
-│   └── project-demo
+│   ├── Dockerfile              # 项目编译与容器打包文件
+│   ├── .env                    # 项目配置.env
+│   └── acctlink-project        # 源码项目目录
+│       ├── archive
+│       │   ├── openapi
+│       ├── package.json
+│       ├── packages
+│       │   ├── appcontext
+│       │   ├── build-cli
+│       │   ├── core
+│       │   ├── sqlite
+│       │   └── wpssync
+│       ├── pnpm-lock.yaml
+│       ├── pnpm-workspace.yaml
+│       ├── tsconfig.json
+│       └── turbo.json
 ├── configs
-│   └── config.yaml
+│   └── config.yaml            # 工具配置文件
 ├── docker
+│   ├── app
+│   │   └── logs
+│   │       └── app.log  # 业务容器日志
 │   ├── mysql
-│   │   └── my.cnf
+│   │   └── my.cnf       # 数据库配置文件
 │   └── nginx
-│       └── conf.d
-│           └── default.conf
-└── docker-compose.yml
+│       ├── conf.d             
+│       │   ├── default_443.conf # nginx SSL 配置文件
+│       │   ├── default_80.conf  # nginx 配置文件
+│       │   └── upstream.conf    # nginx upstream 配置文件
+│       ├── logs
+│       └── ssl
+│           ├── private.pem            # nginx SSL 私钥证书
+│           └── public.pem             # nginx SSL 公钥证书
+├── docker-compose.yml
+├── k8s-deploy.yml                           # k8s deploy 部署文件
+└── scripts
+    └── logrotate_app.sh                     # 日志分割脚本
 ```
 
 ### 配置
@@ -101,13 +127,24 @@ ARCH=$(case $(uname -m) in
 esac)
 
 # 安装基础组件
-mkdir -p /data/acctlink/ && wget -O /data/acctlink/acctlink_$ARCH https://mirrors.infvie.org/account-docking/acctlink/acctlink_$ARCH && cd /data/acctlink/ && chmod +x acctlink_$ARCH && ./acctlink_$ARCH deps install && ./acctlink_$ARCH install
+mkdir -p /data/acctlink/ && \
+wget -O /data/acctlink/acctlink_$ARCH https://mirrors.infvie.org/account-docking/acctlink/acctlink_$ARCH && \
+cd /data/acctlink/ && \
+chmod +x acctlink_$ARCH && \
+./acctlink_$ARCH deps install && \
+./acctlink_$ARCH install
 
 # 拉起基础组件(mysql/nginx)
-./acctlink_$ARCH app create && ./acctlink_$ARCH app up mysql && ./acctlink_$ARCH app up nginx && ./acctlink_$ARCH app ps && ./acctlink_$ARCH report
+./acctlink_$ARCH app create && \
+./acctlink_$ARCH app up mysql && \
+./acctlink_$ARCH app up nginx && \
+./acctlink_$ARCH app ps && \
+./acctlink_$ARCH report
 
 # 编译与拉起业务项目
-./acctlink_$ARCH app build && ./acctlink_$ARCH app up app && ./acctlink_$ARCH app ps
+./acctlink_$ARCH app build && \
+./acctlink_$ARCH app up app && \
+./acctlink_$ARCH app ps
 
 ```
 
