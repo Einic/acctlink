@@ -39,11 +39,11 @@ AcctLink 是一个用 Go 语言编写的高效 Docker 和 Registry 管理工具�
 .
 ├── acctlink_amd64                           # 自动化可执行工具（acctlink_arm64）
 ├── app                                      # 项目工作目录
-│   ├── Dockerfile                     # 项目编译与容器打包文件
-│   ├── .dockerignore                  # 项目配置.dockerignore
-│   ├── .env                           # 项目配置.env
-│   ├── databases.sql                  # 项目数据库SQL文件(配合app reload 自动初始化)
-│   └── acctlink-project               # 源码项目目录
+│   ├── Dockerfile                           # 项目编译与容器打包文件
+│   ├── .dockerignore                        # 项目配置.dockerignore
+│   ├── .env                                 # 项目配置.env
+│   ├── databases.sql                        # 项目数据库SQL文件(配合app reload 自动初始化)
+│   └── acctlink-project                     # 源码项目目录
 │       ├── archive
 │       │   ├── openapi
 │       ├── package.json
@@ -58,26 +58,26 @@ AcctLink 是一个用 Go 语言编写的高效 Docker 和 Registry 管理工具�
 │       ├── tsconfig.json
 │       └── turbo.json
 ├── configs
-│   └── config.yaml                    # 工具配置文件
+│   └── config.yaml                          # 工具配置文件
 ├── docker
 │   ├── app
 │   │   └── logs
-│   │       └── app.log          # 业务容器日志
+│   │       └── app.log                      # 业务容器日志
 │   ├── mysql
-│   │   └── my.cnf               # 数据库配置文件
+│   │   └── my.cnf                           # 数据库配置文件
 │   └── nginx
 │       ├── conf.d             
-│       │   ├── default_443.conf # nginx SSL 配置文件
-│       │   ├── default_80.conf  # nginx 配置文件
-│       │   └── upstream.conf    # nginx upstream 配置文件
-│       ├── logs                       # nginx 日志目录
+│       │   ├── default_443.conf             # nginx SSL 配置文件
+│       │   ├── default_80.conf              # nginx 配置文件
+│       │   └── upstream.conf                # nginx upstream 配置文件
+│       ├── logs                             # nginx 日志目录
 │       │   ├── default_443_access.log
 │       │   ├── default_443_error.log
 │       │   ├── default_80_access.log
 │       │   └── default_80_error.log
 │       └── ssl
-│           ├── private.pem            # nginx SSL 私钥证书
-│           └── public.pem             # nginx SSL 公钥证书
+│           ├── private.pem                  # nginx SSL 私钥证书
+│           └── public.pem                   # nginx SSL 公钥证书
 ├── docker-compose.yml
 ├── k8s-deploy.yml                           # k8s deploy 部署文件
 └── scripts
@@ -90,35 +90,35 @@ AcctLink 是一个用 Go 语言编写的高效 Docker 和 Registry 管理工具�
 
 ```yaml
 docker:
-  version: "28.0.0"                                    # Docker 版本
+  version: "28.0.0"                                        # Docker 版本
   registry_mirror: "https://d8b3zdiw.mirror.aliyuncs.com"  # 镜像加速器
-  insecure_registry: "127.0.0.1:5000"                 # 内部仓库地址
-  data_root: "/data/docker"                           # Docker 数据目录
-  bin_root: "/usr/local/bin"                          # Docker 二进制文件目录
-  systemd_service: "docker"                           # Docker 服务名称
-  config_path: "/etc/docker"                          # Docker 配置目录
+  insecure_registry: "127.0.0.1:5000"                      # 内部仓库地址
+  data_root: "/data/docker"                                # Docker 数据目录
+  bin_root: "/usr/local/bin"                               # Docker 二进制文件目录
+  systemd_service: "docker"                                # Docker 服务名称
+  config_path: "/etc/docker"                               # Docker 配置目录
 registry:
-  port: 5000                                          # Registry 端口
-  data_path: "/data/docker-registry"                  # Registry 数据目录
-  bin_path: "/usr/local/bin/registry"                 # Registry 二进制文件路径
-  config_path: "/etc/docker/registry"                 # Registry 配置目录
-  systemd_service: "registry"                         # Registry 服务名称
+  port: 5000                                               # Registry 端口
+  data_path: "/data/docker-registry"                       # Registry 数据目录
+  bin_path: "/usr/local/bin/registry"                      # Registry 二进制文件路径
+  config_path: "/etc/docker/registry"                      # Registry 配置目录
+  systemd_service: "registry"                              # Registry 服务名称
 download:
-  base_url: "https://mirrors.infvie.org/account-docking/" #在线（组件二进制）下载地址
-  images:                                                 #指定的镜像名称
+  base_url: "https://mirrors.infvie.org/account-docking/"  # 在线（组件二进制）下载地址
+  images:                                                  # 指定的镜像名称
    - node-base#20-alpine
    - nginx#1.26-alpine
    - mysql#8.0.37
    - node#20-alpine
-  images_path: "images"                                   # 本地目录
+  images_path: "images"                                    # 本地目录
 system:
-  required_deps:                                      # 必需的系统依赖
+  required_deps:                                           # 必需的系统依赖
     - tar
     - unzip
     - git
     - wget
     - curl
-  optional_deps:                                      # 可选的系统依赖
+  optional_deps:                                           # 可选的系统依赖
     - vim
 ```
 
