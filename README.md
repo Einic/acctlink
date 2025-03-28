@@ -39,45 +39,45 @@ AcctLink 是一个用 Go 语言编写的高效 Docker 和 Registry 管理工具�
 .
 ├── acctlink_amd64                           # 自动化可执行工具（acctlink_arm64）
 ├── app                                      # 项目工作目录
-│   ├── Dockerfile                           # 项目编译与容器打包文件
-│   ├── .dockerignore                        # 项目配置.dockerignore
-│   ├── .env                                 # 项目配置.env
-│   ├── databases.sql                        # 项目数据库SQL文件(配合app reload 自动初始化)
-│   └── acctlink-project                     # 源码项目目录
-│       ├── archive
-│       │   ├── openapi
-│       ├── package.json
-│       ├── packages
-│       │   ├── appcontext
-│       │   ├── build-cli
-│       │   ├── core
-│       │   ├── sqlite
-│       │   └── wpssync
-│       ├── pnpm-lock.yaml
-│       ├── pnpm-workspace.yaml
-│       ├── tsconfig.json
-│       └── turbo.json
+│   ├── Dockerfile                           # 项目编译与容器打包文件
+│   ├── .dockerignore                        # 项目配置.dockerignore
+│   ├── .env                                 # 项目配置.env
+│   ├── databases.sql                        # 项目数据库SQL文件(配合app reload 自动初始化)
+│   └── acctlink-project                     # 源码项目目录
+│       ├── archive
+│       │   ├── openapi
+│       ├── package.json
+│       ├── packages
+│       │   ├── appcontext
+│       │   ├── build-cli
+│       │   ├── core
+│       │   ├── sqlite
+│       │   └── wpssync
+│       ├── pnpm-lock.yaml
+│       ├── pnpm-workspace.yaml
+│       ├── tsconfig.json
+│       └── turbo.json
 ├── configs
-│   └── config.yaml                          # 工具配置文件
+│   └── config.yaml                          # 工具配置文件
 ├── docker
-│   ├── app
-│   │   └── logs
-│   │       └── app.log                      # 业务容器日志
-│   ├── mysql
-│   │   └── my.cnf                           # 数据库配置文件
-│   └── nginx
-│       ├── conf.d             
-│       │   ├── default_443.conf             # nginx SSL 配置文件
-│       │   ├── default_80.conf              # nginx 配置文件
-│       │   └── upstream.conf                # nginx upstream 配置文件
-│       ├── logs                             # nginx 日志目录
-│       │   ├── default_443_access.log
-│       │   ├── default_443_error.log
-│       │   ├── default_80_access.log
-│       │   └── default_80_error.log
-│       └── ssl
-│           ├── private.pem                  # nginx SSL 私钥证书
-│           └── public.pem                   # nginx SSL 公钥证书
+│   ├── app
+│   │   └── logs
+│   │       └── app.log                      # 业务容器日志
+│   ├── mysql
+│   │   └── my.cnf                           # 数据库配置文件
+│   └── nginx
+│       ├── conf.d             
+│       │   ├── default_443.conf             # nginx SSL 配置文件
+│       │   ├── default_80.conf              # nginx 配置文件
+│       │   └── upstream.conf                # nginx upstream 配置文件
+│       ├── logs                             # nginx 日志目录
+│       │   ├── default_443_access.log
+│       │   ├── default_443_error.log
+│       │   ├── default_80_access.log
+│       │   └── default_80_error.log
+│       └── ssl
+│           ├── private.pem                  # nginx SSL 私钥证书
+│           └── public.pem                   # nginx SSL 公钥证书
 ├── docker-compose.yml
 ├── k8s-deploy.yml                           # k8s deploy 部署文件
 └── scripts
@@ -265,11 +265,11 @@ chmod +x acctlink_$ARCH && \
 
 #### Practical img
 ![Image text](https://mirrors.infvie.org/account-docking/acctlink/img/acctlink.png)
-#### acctlink-install
+##### acctlink-install
 ![Image text](https://mirrors.infvie.org/account-docking/acctlink/img/acctlink-install.png)
-#### acctlink-validating
+##### acctlink-validating
 ![Image text](https://mirrors.infvie.org/account-docking/acctlink/img/acctlink-validating.png)
-#### acctlink-report
+##### acctlink-report
 ![Image text](https://mirrors.infvie.org/account-docking/acctlink/img/acctlink-report.png)
-#### acctlink-uninstall
+##### acctlink-uninstall
 ![Image text](https://mirrors.infvie.org/account-docking/acctlink/img/acctlink-uninstall.png)
