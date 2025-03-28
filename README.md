@@ -124,6 +124,80 @@ system:
 
 ### 使用方法
 
+#### base help
+```shell
+[root@localhost acctlink]# ./acctlink_amd64
+
+ █████╗  ██████╗ ██████╗████████╗██╗     ██╗███╗   ██╗██╗  ██╗
+██╔══██╗██╔════╝██╔════╝╚══██╔══╝██║     ██║████╗  ██║██║ ██╔╝
+███████║██║     ██║        ██║   ██║     ██║██╔██╗ ██║█████╔╝ 
+██╔══██║██║     ██║        ██║   ██║     ██║██║╚██╗██║██╔═██╗ 
+██║  ██║╚██████╗╚██████╗   ██║   ███████╗██║██║ ╚████║██║  ██╗
+╚═╝  ╚═╝ ╚═════╝ ╚═════╝   ╚═╝   ╚══════╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝
+
+***************************************************************
+*            @Author: Einic <einicyeo AT gmail.com>           *
+*            @Description:                                    *
+*            @BLOG:  https://www.infvie.com                   *
+*            @Project home page:                              *
+*            @https://github.com/Einic/EnvoyinStack           *
+***************************************************************
+AcctLink is a comprehensive tool for managing Docker and Registry installations.
+It supports both online and offline installation modes, and provides functionality
+for managing containers, images, and application deployment.
+
+Usage:
+  acctlink_amd64 [flags]
+  acctlink_amd64 [command]
+
+Available Commands:
+  app         Application management commands
+  deps        Dependency management commands
+  help        Help about any command
+  install     Install Docker and Registry
+  report      Generate and print image status report
+  uninstall   Uninstall Docker and Registry
+
+Flags:
+      --config string   config file (default is ./configs/config.yaml)
+  -h, --help            help for acctlink_amd64
+      --offline         run in offline mode(default is run in online mode)
+  -v, --verbose         Show verbose output
+
+Use "acctlink_amd64 [command] --help" for more information about a command.
+```
+
+#### app help
+```shell
+[root@localhost acctlink]# ./acctlink_amd64 app
+Application management commands for building, running, stopping and monitoring
+the application using docker-compose.
+
+Usage:
+  acctlink_amd64 app [command]
+
+Available Commands:
+  build       Build the application
+  compose     Execute any docker-compose command
+  create      Create initialize application structure and configuration
+  init        Initialize the database password environment
+  ps          Show application status
+  reload      Execute SQL files from app directory
+  restart     Restart the application
+  start       Run the application
+  stop        Down the application
+
+Flags:
+  -h, --help   help for app
+
+Global Flags:
+      --config string   config file (default is ./configs/config.yaml)
+      --offline         run in offline mode(default is run in online mode)
+  -v, --verbose         Show verbose output
+
+Use "acctlink_amd64 app [command] --help" for more information about a command.
+```
+
 ```shell
 # 初始化ARCH
 ARCH=$(case $(uname -m) in
@@ -142,8 +216,8 @@ chmod +x acctlink_$ARCH && \
 
 # 拉起基础组件(mysql/nginx)
 ./acctlink_$ARCH app create && \
-./acctlink_$ARCH app up mysql && \
-./acctlink_$ARCH app up nginx && \
+./acctlink_$ARCH app start mysql && \
+./acctlink_$ARCH app start nginx && \
 ./acctlink_$ARCH app ps && \
 ./acctlink_$ARCH report
 
@@ -165,7 +239,7 @@ chmod +x acctlink_$ARCH && \
 ./acctlink_$ARCH app init
 
 # 启动特定服务
-./acctlink_$ARCH app up mysql
+./acctlink_$ARCH app start mysql
 
 # 自动导入app下*.sql文件
 ./acctlink_$ARCH app reload
@@ -177,7 +251,10 @@ chmod +x acctlink_$ARCH && \
 ./acctlink_$ARCH app ps mysql
 
 # 停止特定服务
-./acctlink_$ARCH app down mysql
+./acctlink_$ARCH app stop mysql
+
+# 重启特定服务
+./acctlink_$ARCH app restart mysql
 
 # 执行任意 docker-compose 命令
 ./acctlink_$ARCH app compose logs mysql
