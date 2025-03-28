@@ -124,7 +124,7 @@ system:
 
 ### 使用方法
 
-#### base help
+#### Base help
 ```shell
 [root@localhost acctlink]# ./acctlink_amd64
 
@@ -167,7 +167,7 @@ Flags:
 Use "acctlink_amd64 [command] --help" for more information about a command.
 ```
 
-#### app help
+#### App help
 ```shell
 [root@localhost acctlink]# ./acctlink_amd64 app
 Application management commands for building, running, stopping and monitoring
@@ -198,6 +198,7 @@ Global Flags:
 Use "acctlink_amd64 app [command] --help" for more information about a command.
 ```
 
+#### Practical
 ```shell
 # 初始化ARCH
 ARCH=$(case $(uname -m) in
@@ -228,6 +229,7 @@ chmod +x acctlink_$ARCH && \
 
 ```
 
+#### Practical deep
 ```shell
 # 调试业务项目，前台运行
 ./acctlink_$ARCH app compose run app
@@ -261,6 +263,7 @@ chmod +x acctlink_$ARCH && \
 ./acctlink_$ARCH app compose exec mysql bash
 ```
 
+#### Practical img
 ![Image text](https://mirrors.infvie.org/account-docking/acctlink/img/acctlink.png)
 #### acctlink-install
 ![Image text](https://mirrors.infvie.org/account-docking/acctlink/img/acctlink-install.png)
