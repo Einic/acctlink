@@ -224,7 +224,7 @@ chmod +x acctlink_$ARCH && \
 
 # 编译与拉起业务项目
 ./acctlink_$ARCH app build && \
-./acctlink_$ARCH app up app && \
+./acctlink_$ARCH app restart app && \
 ./acctlink_$ARCH app ps
 
 ```
